@@ -6,13 +6,24 @@ import numpy as np
 import pandas as pd
 from st_aggrid import AgGrid, GridOptionsBuilder
 #connection to databse
-connection = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="root",
-    database="hospital_management_system"
-)
+def get_connection():
+    return mysql.connector.connect(
+        host=st.secrets["DB_HOST"],
+        port=int(st.secrets["DB_PORT"]),
+        user=st.secrets["DB_USER"],
+        password=st.secrets["DB_PASSWORD"],
+        database=st.secrets["DB_NAME"],
+        ssl_disabled=False
+    )
+connection=get_connection()
 cursor = connection.cursor()
+# connection = mysql.connector.connect(
+#     host="localhost",
+#     user="root",
+#     password="root",
+#     database="hospital_management_system"
+# )
+# cursor = connection.cursor()
 #login page
 # if "logged_in" not in st.session_state:
 #     st.session_state.logged_in = False
